@@ -1,4 +1,6 @@
+from re import T
 from otree.api import *
+import cv2
 
 
 doc = """
@@ -29,8 +31,25 @@ class Introduction(Page):
     pass
 
 
-class FacialCapture(WaitPage):
-    pass
+class FacialCapture(Page):
+    # TODO: set up livepage for taking photo using webcam
+    @staticmethod
+    def take_pic(player, data):
+        player_took_pic = data["player_took_pic"]
+        if player_took_pic is True:
+
+            cap = cv2.VideoCapture(0) # initializing webcam
+
+            # Check if the webcam is opened correctly
+            if not cap.isOpened():
+                raise IOError("Cannot open webcam")
+            
+            ret, frame = cap.read()
+            frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+
+            
+
+
 
 
 class FacialRecognition(Page):
