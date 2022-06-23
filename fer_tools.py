@@ -1,5 +1,7 @@
-import cv2
+import cv2, base64
 from fer import FER
+from PIL import Image
+from io import BytesIO
 import matplotlib.pyplot as plt 
 
 
@@ -49,3 +51,21 @@ def facial_emotion_recognizer(img_name, img_path):
     # Use the top Emotion() function to call for the dominant emotion in the image
     dominant_emotion, emotion_score = emo_detector.top_emotion(test_image_one)
     return (dominant_emotion, emotion_score)
+
+
+def base64_decoder(b64_string, img_name, img_path):
+    """
+    Converts a base 64 image to png format
+
+    Input: Base 64 image (string)
+    Output: None
+    """
+
+    # converting b64 str to to img object
+    byte_img = bytes(b64_string, "utf-8")
+    decoded_bytes = base64.decodebytes(byte_img)
+    img = Image.open(BytesIO(decoded_bytes)) 
+
+    # storing img on designated path
+    filename = f"{img_path}/{img_name}.jpeg"
+    img.save(filename)

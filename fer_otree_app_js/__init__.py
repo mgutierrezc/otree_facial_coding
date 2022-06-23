@@ -1,5 +1,6 @@
 from re import T
 from statistics import mode
+from tracemalloc import Snapshot
 from otree.api import *
 import fer_tools
 
@@ -36,7 +37,16 @@ class Introduction(Page):
 class FacialCapture(Page):
     form_model = "player"
     form_fields = ["base_image"]
-            
+    
+    @staticmethod
+    def before_next_page(player, timeout_happened):
+        # TODO: use face recog software
+        snapshot_path = "fer_otree_app_js/snapshots"
+        snapshot_name = "screen_cap"
+
+        img_fixed_format = player.base_image.replace("data:image/jpeg;base64,", "")
+        fer_tools.base64_decoder(img_fixed_format, snapshot_name, snapshot_path)
+        
 
 class FacialRecognition(Page):
     pass
