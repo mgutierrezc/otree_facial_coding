@@ -1,10 +1,26 @@
 {{ block title }}
-    Page title
+    Facial Capture Page!
 {{ endblock }}
 
 {{ block content }}
+    After starting your webcam, press space to take a picture.
+
+    <button type="button" onclick="sendValue()">Click to start your webcam</button>
+
+    <script>
+      
+        document.addEventListener("DOMContentLoaded", (event) => {
+            liveSend({});
+        });
+
+        function sendValue() {
+          liveSend({"player_took_pic":true});
+        }
+      
+      </script>
 
     {{ next_button }}
+
 {{ endblock }}
 
 

@@ -9,7 +9,7 @@ Facial Emotion Recognition app in oTree
 
 
 class C(BaseConstants):
-    NAME_IN_URL = 'fer_otree_app'
+    NAME_IN_URL = 'fer_otree_app_js'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
 
@@ -23,6 +23,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    base_image = models.LongStringField()
     dominant_emotion = models.StringField()
     emotion_score = models.FloatField()
 
@@ -33,17 +34,8 @@ class Introduction(Page):
 
 
 class FacialCapture(Page):
-    # TODO: set up livepage for taking photo using webcam
-    @staticmethod
-    def take_pic(player, data):
-        print("data", data)
-        player_took_pic = data["player_took_pic"]
-
-        pic_name = "test_pic"
-        pic_path = "pic_path"
-        if player_took_pic is True:
-            fer_tools.picture_taker(pic_name, pic_path)
-            player.dominant_emotion, player.emotion_score = fer_tools.facial_emotion_recognizer(pic_name, pic_path)
+    form_model = "player"
+    form_fields = ["base_image"]
             
 
 class FacialRecognition(Page):
