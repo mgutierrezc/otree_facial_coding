@@ -45,7 +45,7 @@ def facial_emotion_recognizer(img_name, img_path):
     Output: Dominant emotion (str) and Score (Float)
     """
 
-    test_image_one = plt.imread(f"{img_path}/{img_name}.png")
+    test_image_one = plt.imread(f"{img_path}/{img_name}.jpeg")
     emo_detector = FER(mtcnn=True)
         
     # Use the top Emotion() function to call for the dominant emotion in the image

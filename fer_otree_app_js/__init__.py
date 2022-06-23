@@ -41,11 +41,16 @@ class FacialCapture(Page):
     @staticmethod
     def before_next_page(player, timeout_happened):
         # TODO: use face recog software
+        # snapshot main params
         snapshot_path = "fer_otree_app_js/snapshots"
         snapshot_name = "screen_cap"
 
+        # storing snapshot
         img_fixed_format = player.base_image.replace("data:image/jpeg;base64,", "")
         fer_tools.base64_decoder(img_fixed_format, snapshot_name, snapshot_path)
+
+        # performing FER
+        player.dominant_emotion, player.emotion_score = fer_tools.facial_emotion_recognizer(snapshot_name, snapshot_path)
         
 
 class FacialRecognition(Page):
