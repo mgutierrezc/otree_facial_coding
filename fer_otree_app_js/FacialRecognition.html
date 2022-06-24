@@ -1,10 +1,45 @@
 {{ block title }}
-    Page title
+    Facial Recognition Results
 {{ endblock }}
 
 {{ block content }}
+    <p>Here are the results of the Emotion Recognition analysis</p>
 
-    {{ next_button }}
+    <img src={{b64_picture}}>
+
+    <style type="text/css">
+        .tg  {border:none;border-collapse:collapse;border-color:#ccc;border-spacing:0;}
+        .tg td{background-color:#fff;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+          font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg th{background-color:#f0f0f0;border-color:#ccc;border-style:solid;border-width:0px;color:#333;
+          font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+        .tg .tg-jxgv{background-color:#FFF;border-color:inherit;text-align:left;vertical-align:top}
+        .tg .tg-dvid{background-color:#efefef;border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}
+    </style>
+    <table class="tg">
+    <thead>
+        <tr>
+        <th class="tg-dvid">Dominant Emotion</th>
+        <th class="tg-jxgv">{{ dominant_emotion }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td class="tg-dvid">Conciliador</td>
+        <td class="tg-jxgv">{{ emotion_score }}</td>
+        </tr>
+    </tbody>
+    </table>
+
+    <br>
+    <p>
+        This is the end of the test. Hope you had some fun! If you want to try again,
+        click on the same link you used to access here :)
+    </p>
+	<p>
+		{{ include C.contact_template }}
+	</p>
+    
 {{ endblock }}
 
 

@@ -7,32 +7,49 @@
 <!doctype html>
 <html>
 <body>
-  <!-- CSS -->
-  <style>
-    #my_camera{
-        width: 320px;
-        height: 240px;
-        border: 1px solid black;
-    }
+	<!-- CSS -->
+	<style>
+	#my_camera{
+		width: 320px;
+		height: 240px;
+		border: 1px solid black;
+	}
 	</style>
 
-  <p>
-    Once you have taken a picture you like, click on the Next button to start with the Facial Emotion Recognition process.
-  </p>
+	<p>
+		Welcome! This is an oTree app that can be used for Facial Emotion Recognition experiments. Feel free to download the 
+		source code here. You can contact me by mail in case you have any question regarding it.
+	</p>
+
+	<h4>Instructions</h4>
+	
+	<ul>
+		<li>Position your face in front of the camera. </li>
+		<li>Click on "Take snapshot"</li>
+		<ul>
+			<li>If you are satisfied with your picture, click on "Next" (scroll down if you don't see it)</li>
+			<li>Else, take a new snapshot. It will automatically replace the previous one. </li>
+		</ul>
+		<li><b>Note: </b>only the photo used for the FER is stored. the other ones are automatically deleted each time you
+		take a new one.</li>
+	</ul>
+
+	<h4>Facial Capure section</h4>
+	<br>
 
 	<div id="my_camera"></div>
-  
-  <input type=button value="Take Snapshot" onClick="take_snapshot()">
-  <br><br>
-  <div id="results" ></div>
-  <input type="hidden" name="base_image" id="base_image" />
-  <br><br>
-  
-  {{ formfield_errors 'base_image' }} 
-
-  <br><br>
-  {{ next_button }}
-
+	<br>
+	<input type=button value="Take Snapshot" onClick="take_snapshot()">
+	<br><br>
+	<div id="results" ></div>
+	<input type="hidden" name="base_image" id="base_image" />
+	<br><br>
+	{{ next_button }}
+	
+	<br><br>
+	<p>
+		{{ include C.contact_template }}
+	</p>
 
 	
 	<!-- Webcam.min.js -->

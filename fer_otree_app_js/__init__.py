@@ -13,7 +13,7 @@ class C(BaseConstants):
     NAME_IN_URL = 'fer_otree_app_js'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
-
+    contact_template = "fer_otree_app_js/Contact.html"
 
 class Subsession(BaseSubsession):
     pass
@@ -30,20 +30,15 @@ class Player(BasePlayer):
 
 
 # PAGES
-class Introduction(Page):
-    pass
-
-
 class FacialCapture(Page):
     form_model = "player"
     form_fields = ["base_image"]
     
     @staticmethod
     def before_next_page(player, timeout_happened):
-        # TODO: use face recog software
         # snapshot main params
         snapshot_path = "fer_otree_app_js/snapshots"
-        snapshot_name = "screen_cap"
+        snapshot_name = "screen_cap" + "-" + player.participant.code
 
         # storing snapshot
         img_fixed_format = player.base_image.replace("data:image/jpeg;base64,", "")
@@ -54,7 +49,10 @@ class FacialCapture(Page):
         
 
 class FacialRecognition(Page):
-    pass
+    def vars_for_template(player):
+        return {"b64_picture": player.base_image,
+                "dominant_emotion": player.dominant_emotion, 
+                "emotion_score": player.emotion_score}
 
 
-page_sequence = [Introduction, FacialCapture, FacialRecognition]
+page_sequence = [FacialCapture, FacialRecognition]
