@@ -46,7 +46,11 @@ class FacialCapture(Page):
 
         # performing FER
         player.dominant_emotion, player.emotion_score = fer_tools.facial_emotion_recognizer(snapshot_name, snapshot_path)
-        
+
+
+class VideoCapture(Page):
+    pass
+
 
 class FacialRecognition(Page):
     def vars_for_template(player):
