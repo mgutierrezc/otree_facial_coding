@@ -40,7 +40,9 @@
 
 	<div id="my_camera"></div>
 	<br>
-	<input type=button value="Take Snapshot" onClick="take_snapshot()">
+
+	<button class="button">Take snapshots</button>
+	
 	<br><br>
 	<div id="results" ></div>
 	<input type="hidden" name="base_image" id="base_image" />
@@ -71,20 +73,48 @@
 	<!-- Code to handle taking the snapshot and displaying it locally -->
 	<script language="JavaScript">
 
-		function take_snapshot() {
-			
+
+		function take_snapshot() {	
+			var img = '';
+
 			// take snapshot and get image data
 			Webcam.snap( function(data_uri) {
 				// display results in page
 				document.getElementById('results').innerHTML = 
 					'<img src="'+data_uri+'"/>';
-        document.getElementById('base_image').value = 
-          data_uri;
+        		
+				img = data_uri;
 			} );
 
+			return img;
 		}
 
-		
+		$('.button').click(function() {
+			var imgs = '';
+
+			var started = Date.now();
+
+			// make it loop every 200 milliseconds
+			var interval = setInterval(function(){
+
+				// for 2 seconds
+				if (Date.now() - started > 2000) {
+
+				// and then pause it
+				clearInterval(interval);
+
+				} else {
+
+				// the thing to do every 100ms
+				imgs = imgs + "----" + take_snapshot();
+				}
+			}, 200); // every 200 milliseconds
+
+			document.getElementById('base_image').value = imgs;
+		});
+
+
+
   
 	</script>
 	
