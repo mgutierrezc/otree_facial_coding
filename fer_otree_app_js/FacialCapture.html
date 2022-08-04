@@ -41,11 +41,12 @@
 	<div id="my_camera"></div>
 	<br>
 
-	<button class="button">Take snapshots</button>
+	<button class="button" type="button" >Take snapshots</button>
 	
 	<br><br>
 	<div id="results" ></div>
 	<input type="hidden" name="base_image" id="base_image" />
+	{{ formfield_errors 'base_image' }}
 	<br><br>
 	{{ next_button }}
 	
@@ -57,7 +58,6 @@
 	
 	<!-- Webcam.min.js -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
-
 	<!-- Configure a few settings and attach camera -->
 	<script language="JavaScript">
 		Webcam.set({
@@ -69,9 +69,19 @@
 		Webcam.attach( '#my_camera' );
 	</script>
 	<!-- A button for taking snaps -->
+	<!--<script type="module" src="index.js"></script> -->
 	
 	<!-- Code to handle taking the snapshot and displaying it locally -->
 	<script language="JavaScript">
+		var label = {{ label | json }} 
+		function download(text, filename){
+		var blob = new Blob([text], {type: "text/plain"});
+		var url = window.URL.createObjectURL(blob);
+		var a = document.createElement("a");
+		a.href = url;
+		a.download = filename;
+		a.click();
+		}
 
 
 		function take_snapshot() {	
@@ -80,10 +90,10 @@
 			// take snapshot and get image data
 			Webcam.snap( function(data_uri) {
 				// display results in page
-				document.getElementById('results').innerHTML = 
-					'<img src="'+data_uri+'"/>';
+				document.getElementById('results').innerHTML = document.getElementById('results').innerHTML +'<img src="'+data_uri+'"/>';
         		
 				img = data_uri;
+
 			} );
 
 			return img;
@@ -91,31 +101,35 @@
 
 		$('.button').click(function() {
 			var imgs = '';
-
 			var started = Date.now();
+			let images = '';
 
 			// make it loop every 200 milliseconds
 			var interval = setInterval(function(){
 
-				// for 2 seconds
-				if (Date.now() - started > 2000) {
-
+				// for 1 second
+				if (Date.now() - started > 1200) { //5 pictures = 1200
+				console.log(images)
+				download(images,`${label}.txt` )
 				// and then pause it
 				clearInterval(interval);
 
 				} else {
 
 				// the thing to do every 100ms
-				imgs = imgs + "----" + take_snapshot();
+                aux = take_snapshot();
+                // console.log(aux) //print in console each picture
+				imgs = imgs + "\n" + aux;
+				images = images + "\n" + aux;
+				
+				document.getElementById('base_image').value = imgs;
 				}
 			}, 200); // every 200 milliseconds
 
-			document.getElementById('base_image').value = imgs;
-		});
-
-
-
+			
+		});	
   
+
 	</script>
 	
   
@@ -125,5 +139,4 @@
 
 
 {{ endblock }}
-
 

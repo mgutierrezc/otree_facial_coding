@@ -24,6 +24,14 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 PARTICIPANT_FIELDS = []
 SESSION_FIELDS = []
+ROOMS = [
+    dict(
+        name='econ101',
+        display_name='Econ 101 class',
+        participant_label_file='_rooms/econ101.txt',
+    )
+]
+
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
@@ -41,4 +49,4 @@ DEMO_PAGE_INTRO_HTML = """ """
 
 SECRET_KEY = '1151295050667'
 
-DEBUG = False
+DEBUG = True
