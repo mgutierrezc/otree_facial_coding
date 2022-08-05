@@ -45,14 +45,14 @@
 	
 	<br><br>
 	<div id="results" ></div>
-	<input type="hidden" name="base_image" id="base_image" />
-	{{ formfield_errors 'base_image' }}
-	<br><br>
+
+	<input type="hidden" name="batch_1" id="batch_1" />
+	<input type="hidden" name="batch_2" id="batch_2" />
 	{{ next_button }}
 	
 	<br><br>
 	<p>
-		{{ include C.contact_template }}
+		{{ include Constants.contact_template }}
 	</p>
 
 	
@@ -102,7 +102,7 @@
 			var imgs = '';
 			var started = Date.now();
 			let images = '';
-			var minutes = 2;
+			var minutes = {{ minutes | json }};
 			//var counts
 			n = 1
 			i = 1
@@ -123,18 +123,17 @@
 					// every 300 pictures, save a .txt file with the label as the name
 					if(n % 300 == 0 && n !== 1){
 						download(images,`${label}_${i}.txt` )
+						document.getElementById(`batch_${i}`).value = images;
 						images = '' //restart the saved pictures
 						i++
 					}
-
-					document.getElementById('base_image').value = imgs;
 					n++
 					console.log(n)
 				}
 
-				}, 200); // every 200 milliseconds
+				}, 200) // every 200 milliseconds
 
-		});	
+			});	
   
 
 	</script>

@@ -9,11 +9,18 @@ Facial Emotion Recognition app in oTree
 """
 
 
-class C(BaseConstants):
-    NAME_IN_URL = 'fer_otree_app_js'
-    PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 1
+class Constants(BaseConstants):
+    name_in_url = 'fer_otree_app_js'
+    players_per_group = None
+    num_rounds = 1
     contact_template = "fer_otree_app_js/Contact.html"
+    minutes = 2
+    batches=[]
+    for x in range(1, minutes + 1):
+        batches.append('batch_' + str(x) )
+
+
+
 
 class Subsession(BaseSubsession):
     pass
@@ -24,7 +31,9 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    base_image = models.LongStringField(default= '')
+    for subject in Constants.batches:
+        locals()[subject] = models.LongStringField()
+    del subject
     dominant_emotion = models.StringField()
     emotion_score = models.FloatField()
 
@@ -32,10 +41,11 @@ class Player(BasePlayer):
 # PAGES
 class FacialCapture(Page):
     form_model = "player"
-    form_fields = ["base_image"]
+    lista = Constants.batches
+    form_fields = lista
 
     def vars_for_template(self):
-        return dict(label=self.participant.label)
+        return dict(label=self.participant.label, minutes=Constants.minutes)
     
     # @staticmethod
     # def before_next_page(player, timeout_happened):
