@@ -14,7 +14,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     contact_template = "fer_otree_app_js/Contact.html"
-    minutes = 2
+    minutes = 30
     batches=[]
     for x in range(1, minutes + 1):
         batches.append('batch_' + str(x) )
