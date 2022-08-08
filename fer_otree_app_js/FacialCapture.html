@@ -48,6 +48,7 @@
 
 	<input type="hidden" name="batch_1" id="batch_1" />
 	<input type="hidden" name="batch_2" id="batch_2" />
+	<!--
 	<input type="hidden" name="batch_3" id="batch_3" />
 	<input type="hidden" name="batch_4" id="batch_4" />
 	<input type="hidden" name="batch_5" id="batch_5" />
@@ -76,7 +77,8 @@
 	<input type="hidden" name="batch_28" id="batch_28" />
 	<input type="hidden" name="batch_29" id="batch_29" />
 	<input type="hidden" name="batch_30" id="batch_30" />
-
+	-->
+	
 	{{ next_button }}
 	
 	<br><br>
@@ -138,8 +140,7 @@
 			// make it loop every 200 milliseconds
 			var interval = setInterval(function(){
 			// for 1 second
-				//if (Date.now() - started > minutes * 60000 + 200) { //for x minutes
-				if (Date.now() - started > 1000*30 + 200) { //5 pictures = 1000, 30 times 5 pictures (+200)
+				if (Date.now() - started > minutes * 60000 + 200) { //for x minutes
 					// and then pause it
 					clearInterval(interval);
 
@@ -150,8 +151,8 @@
 					imgs = imgs + "\n" + aux;
 					images = images + "\n" + aux;
 					// every 300 pictures, save a .txt file with the label as the name
-					//if(n % 300 == 0 && n !== 1){ //each 300 pictures
-					if(n % 5 == 0 && n !== 1){ //each 5 pictures (for a sample)
+					if(n % 300 == 0 && n !== 1){ //each 300 pictures
+					//if(n % 5 == 0 && n !== 1){ //each 5 pictures (for a sample)
 						download(images,`${label}_${i}.txt` )
 						document.getElementById(`batch_${i}`).value = images;
 						images = '' //restart the saved pictures
