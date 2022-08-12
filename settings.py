@@ -2,11 +2,6 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='fer_otree_app',
-        app_sequence=['fer_otree_app'],
-        num_demo_participants=2,
-    ),
-    dict(
         name='fer_otree_app_js',
         app_sequence=['fer_otree_app_js'],
         num_demo_participants=2,
