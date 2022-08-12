@@ -12,9 +12,9 @@ fer==22.4.0
 flatbuffers==1.12
 fonttools==4.33.3
 gast==0.3.3
-google-auth==1.35.0
-google-auth-oauthlib==0.4.6
-google-pasta==0.2.0
+# google-auth==1.35.0
+# google-auth-oauthlib==0.4.6
+# google-pasta==0.2.0
 grpcio==1.32.0
 h11==0.13.0
 h5py==2.10.0
@@ -28,7 +28,7 @@ kiwisolver==1.4.3
 libclang==14.0.1
 Markdown==3.3.7
 MarkupSafe==1.1.1
-matplotlib==3.5.2
+# matplotlib==3.5.2
 mtcnn==0.1.1
 numpy==1.19.5
 oauthlib==3.2.0
