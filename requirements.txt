@@ -32,8 +32,9 @@ matplotlib==3.5.2
 mtcnn==0.1.1
 numpy==1.19.5
 oauthlib==3.2.0
-opencv-contrib-python==4.6.0.66
-opencv-python==4.6.0.66
+opencv-contrib-python-headless
+#opencv-contrib-python==4.6.0.66
+#opencv-python==4.6.0.66
 #opencv-python-headless
 opt-einsum==3.3.0
 otree==5.8.5

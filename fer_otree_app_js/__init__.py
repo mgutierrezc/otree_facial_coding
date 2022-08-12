@@ -2,6 +2,7 @@ from re import T
 from statistics import mode
 from tracemalloc import Snapshot
 from otree.api import *
+import fer_tools
 
 doc = """
 Facial Emotion Recognition app in oTree
