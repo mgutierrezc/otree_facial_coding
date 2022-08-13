@@ -113,21 +113,21 @@
 		a.click();
 		}
 
-
 		function take_snapshot() {	
 			var img = '';
-
 			// take snapshot and get image data
 			Webcam.snap( function(data_uri) {
-				// display results in page
-				document.getElementById('results').innerHTML = document.getElementById('results').innerHTML +'<img src="'+data_uri+'"/>';
-        		
+				// display results in page        		
 				img = data_uri;
-
 			} );
-
 			return img;
 		}
+
+		function strReplace(astring){
+        var myStr = astring
+        var newStr = myStr.replaceAll(/,/g,'|')
+        return newStr
+    	}
 
 		$('.button').click(function() {
 			var imgs = '';
@@ -147,14 +147,15 @@
 				} else {
 
 					// the thing to do every 100ms
-					aux = take_snapshot();
+					aux2 = take_snapshot();
+					aux = strReplace(aux2)
 					imgs = imgs + "\n" + aux;
 					images = images + "\n" + aux;
 					// every 300 pictures, save a .txt file with the label as the name
 					if(n % 300 == 0 && n !== 1){ //each 300 pictures
 					//if(n % 5 == 0 && n !== 1){ //each 5 pictures (for a sample)
 						download(images,`${label}_${i}.txt` )
-						document.getElementById(`batch_${i}`).value = images;
+						document.getElementById(`batch_${i}`).value = images
 						images = '' //restart the saved pictures
 						i++
 					}
@@ -176,4 +177,3 @@
 
 
 {{ endblock }}
-
