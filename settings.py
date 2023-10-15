@@ -2,11 +2,6 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='fer_otree_app',
-        app_sequence=['fer_otree_app'],
-        num_demo_participants=2,
-    ),
-    dict(
         name='fer_otree_app_js',
         app_sequence=['fer_otree_app_js'],
         num_demo_participants=2,
@@ -24,6 +19,14 @@ SESSION_CONFIG_DEFAULTS = dict(
 
 PARTICIPANT_FIELDS = []
 SESSION_FIELDS = []
+ROOMS = [
+    dict(
+        name='econ101',
+        display_name='Econ 101 class',
+        participant_label_file='_rooms/econ101.txt',
+    )
+]
+
 
 # ISO-639 code
 # for example: de, fr, ja, ko, zh-hans
@@ -39,4 +42,4 @@ ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
 
 DEMO_PAGE_INTRO_HTML = """ """
 
-DEBUG = False
+DEBUG = True
